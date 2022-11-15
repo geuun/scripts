@@ -13,10 +13,10 @@
 # }
 # 입력예시 
 # -> springboot url root 1234 8080:8080 Y
+echo "========================================================================================="
 echo "Please Enter The Params"
 echo "<ProjectName> <url> <username> <password> <port> <-d : Y/N>"
-
-read -a args
+read -p ">>" -a args
 
 # # 입력 받은 값 출력
 # echo "ProjectName: " ${args[0]}
@@ -41,19 +41,29 @@ fi
 
 
 # 최종 입력 값
-echo ${args[0]} ${args[1]} ${args[2]} ${args[3]} ${args[4]} ${DemonOpt}
+echo "========================================================================================="
+echo "Your params:" ${args[0]} ${args[1]} ${args[2]} ${args[3]} ${args[4]} ${DemonOpt}
+echo "========================================================================================="
 
 # 기존 컨테이너 중지
+echo "Stop Existing Container"
 docker stop ${args[0]}
 
 # 프로젝트 폴더 진입
+echo "Entering The Project Directory"
 cd ~/dev/${args[0]}
 
 # git pull
+echo "Pull repository"
 git pull
 
 # 이미지 빌드
+echo "Build image tag:" ${args[0]}
 docker build -t ${args[0]} . 
 
 # 컨테이너 빌드
+echo "Build Container"
 docker run -p ${args[4]} -e SPRING_DATASOURCE_URL=${args[1]} -e SPRING_DATASOURCE_USERNAME=${args[2]} -e SPRING_DATASOURCE_PASSWORD=${args[3]} ${DemonOpt} ${args[0]}
+
+# 완료 문장
+echo "***********************************  Deploy is Done! **************************************"
