@@ -74,11 +74,11 @@ echo "Build image tag:" ${args[0]}
 echo "========================================================================================="
 docker build -t ${args[0]} . 
 
-# 컨테이너 빌드
+# 컨테이너 빌드 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 echo "========================================================================================="
 echo "Build Container"
 echo "========================================================================================="
-docker run -p ${args[4]} -e SPRING_DATASOURCE_URL=${args[1]} -e SPRING_DATASOURCE_USERNAME=${args[2]} -e SPRING_DATASOURCE_PASSWORD=${args[3]} ${DemonOpt} ${args[0]} --name ${args[0]}
+docker run ${DemonOpt} --name ${args[0]} -p ${args[4]} -e SPRING_DATASOURCE_URL=${args[1]} -e SPRING_DATASOURCE_USERNAME=${args[2]} -e SPRING_DATASOURCE_PASSWORD=${args[3]} ${args[0]}
 
 # 완료 문장
 echo "***********************************  Deploy is Done! **************************************"
