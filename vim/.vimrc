@@ -72,6 +72,7 @@ set encoding=utf-8  " eincoding 방식 설정
 set nu              "Line 출력
 set tabstop=4       "<Tab> key 4칸 이동
 set shiftwidth=4	"<Tab>
+set expandtab       "<Tab>
 set cursorline      "현재 줄 강조
 set mouse=a	    "커서이동 마우스로도 가능
 set mouse=r
