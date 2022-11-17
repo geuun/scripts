@@ -16,6 +16,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'hynek/vim-python-pep8-indent'   " python 자동 들여쓰기 Plugin
 Plugin 'nvie/vim-flake8'                " python 문법 검사 plugin
+Plugin 'AutoComplPop' 					" Vim에서 자동완성 기능(Ctrl + P)을 키입력하지 않더라도 자동으로 나타나게
 
 call vundle#end()
 
@@ -38,9 +39,11 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 
 " for vim-airline
-let g:airline#extensions#tabline#enabled = 1 " turn on buffer list
-let g:airline_theme='hybrid'
-set laststatus=2 " turn on bottom bar
+set laststatus=2 " vim 하단에 삳태바 표시 ( 0 : 미표시 1 : 창이 2개일때 2 : 항상표시)
+let g:airline#extensions#tabline#enabled = 1 " vim 상단 버퍼목록 (파일) 켜기 설정
+let g:airline_theme='minimalist' " airline 테마 설정
+let g:airline_highlighting_cache = 1 " 다양한 구문 강조 그룹의 캐싱 활성화
+let g:airline_powerline_fonts = 1 " powerline 폰트와 통합하여  powerline의 기호들이 g:airline_symbols에 자동으로 채워진다.
 let mapleader = ","
 nnoremap <leader>q :bp<CR>
 nnoremap <leader>w :bn<CR>
@@ -68,8 +71,12 @@ set t_Co=256        "구문강조 색 변경
 set encoding=utf-8  " eincoding 방식 설정
 set nu              "Line 출력
 set tabstop=4       "<Tab> key 4칸 이동
+set shiftwidth=4	"<Tab>
 set cursorline      "현재 줄 강조
 set mouse=a	    "커서이동 마우스로도 가능
+set smartindent " 자동들여쓰기
+set hlsearch	" 검색시 하이라이팅 기능
+set ignorecase	" 검색시 대소문자 구분하지 않음
 
 
 "-------------------------------------------- vim 기본 설정 끝
