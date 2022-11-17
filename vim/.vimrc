@@ -74,6 +74,7 @@ set tabstop=4       "<Tab> key 4칸 이동
 set shiftwidth=4	"<Tab>
 set cursorline      "현재 줄 강조
 set mouse=a	    "커서이동 마우스로도 가능
+set mouse=r
 set smartindent " 자동들여쓰기
 set hlsearch	" 검색시 하이라이팅 기능
 set ignorecase	" 검색시 대소문자 구분하지 않음
