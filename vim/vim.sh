@@ -14,6 +14,11 @@ cd ~/.vim/colors
 curl -O https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
 
 # 적용작업 필요
-# cd ~/.vimrc
+# vim ~/.vimrc
 # :source %
 # :PluginInstall
+
+echo "아래 작업을 수행하세요."
+echo "$ vim ~/.vimrc "
+echo "$ :source %"
+echo "$ :PluginInstall"
