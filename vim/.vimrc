@@ -91,4 +91,3 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 nmap <leader>nt :NERDTreeToggle<cr>
 let NERDTreeShowLineNumbers=1
 let g:NERDTreeWinPos = "left"
-nmap <F1> :NERDTreeToggle<CR>
