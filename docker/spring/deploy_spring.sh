@@ -15,11 +15,16 @@
 # }
 # 입력예시 
 # -> springboot url root 1234 8080:8080 Y
-echo "========================================================================================="
+echo "***********************"
 echo "Please Enter The Params"
 echo "<ProjectName> <url> <username> <password> <port> <-d : Y/N>"
-read -p ">>" -a args
-echo "========================================================================================="
+read -p “ProjectName : ” ProjectName
+read -p “URL : ” URL
+read -p “UserName : ” UserName
+read -p “Password : ” Password
+read -p “Port : ” Port
+read -p “Daemon <Y/N> : ” Daemon
+echo "***********************"
 
 # # 입력 받은 값 출력
 # echo "ProjectName: " ${args[0]}
@@ -30,13 +35,13 @@ echo "==========================================================================
 # echo ""${args[5]}
 
 # 데몬 조건문
-if [ "${args[5]}" == "Y" ]
+if [ "${daemon}" == "Y" ]
 then
         DemonOpt="-d"
         echo "DemonOpt: ON"
-elif [ "${args[5]}" = "N" ]
+elif [ "${daemon}" = "N" ]
 then
-        DemonOpt=""
+        DaemonOpt=""
         echo "DemonOpt: OFF"
 else
         exit 1
@@ -45,37 +50,54 @@ fi
 
 
 # 최종 입력 값
-echo "========================================================================================="
-echo "<ProjectName> <url> <username> <password> <port> <-d : Y/N>"
-echo "Your params:" ${args[0]} ${args[1]} ${args[2]} ${args[3]} ${args[4]} ${DemonOpt}
+echo "*****************************************************************"
+echo "*** <ProjectName> <url> <username> <password> <port> <Deamon> ***"
+echo "*****************************************************************"
+echo ""
+echo "Your params >>" ${ProjectName} ${URL} ${UserName} ${Password} ${Port}  ${DemonOpt}
+echo ""
 
 # 기존 컨테이너 중지
-echo "========================================================================================="
-echo "Stop Existing Container"
-docker stop ${args[0]}
+echo "*******************************"
+echo "*** Stop Existing Container ***"
+echo "*******************************"
+docker stop ${ProjectName}
+
 
 # 기존 컨테이너 이름 변경
-docker rename ${args[0]} old${args[0]}
+docker rename ${ProjectName} old${ProjectName}
 
-# 프로젝트 폴더 진입
-echo "========================================================================================="
-echo "Entering The Project Directory"
-cd ~/dev/${args[0]}
+
+# 프로젝트 폴더 진입 (절대경로)
+echo "**************************************"
+echo "*** Entering The Project Directory ***"
+echo "**************************************"
+cd ~/dev/${ProjectName}
+
 
 # git pull
-echo "========================================================================================="
-echo "Pull repository"
+echo "***********************"
+echo "*** Pull repository ***"
+echo "***********************"
 git pull
 
+
 # 이미지 빌드
-echo "========================================================================================="
-echo "Build image tag:" ${args[0]}
-docker build -t ${args[0]} . 
+echo "*******************"
+echo "*** Build image ***"
+echo "*******************"
+docker build -t ${ProjectName} . 
+
 
 # 컨테이너 빌드 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
-echo "========================================================================================="
-echo "Build Container"
-docker run ${DemonOpt} --name ${args[0]} -p ${args[4]} -e SPRING_DATASOURCE_URL=${args[1]} -e SPRING_DATASOURCE_USERNAME=${args[2]} -e SPRING_DATASOURCE_PASSWORD=${args[3]} ${args[0]}
+echo "***********************"
+echo "*** Build Container ***"
+echo "***********************"
+docker run ${DemonOpt} --name ${ProjectName} -p ${Port} -e SPRING_DATASOURCE_URL=${URL} -e SPRING_DATASOURCE_USERNAME=${UserName} -e SPRING_DATASOURCE_PASSWORD=${Password} ${DaemonOpt}
 
 # 완료 문장
-echo "***********************************  Deploy is Done! **************************************"
+echo "##########################################################################################"
+echo "###################################  Deploy is Done! #####################################"
+echo "##########################################################################################"
+
+
