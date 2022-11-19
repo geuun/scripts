@@ -15,34 +15,31 @@
 # }
 # 입력예시 
 # -> springboot url root 1234 8080:8080 Y
-echo "***********************"
-echo "Please Enter The Params"
-echo "<ProjectName> <url> <username> <password> <port> <-d : Y/N>"
-read -p “ProjectName : ” ProjectName
-read -p “URL : ” URL
-read -p “UserName : ” UserName
-read -p “Password : ” Password
-read -p “Port : ” Port
-read -p “Daemon <Y/N> : ” Daemon
-echo "***********************"
 
-# # 입력 받은 값 출력
-# echo "ProjectName: " ${args[0]}
-# echo "url: "${args[1]}
-# echo "username: "${args[2]}
-# echo "password: "${args[3]}
-# echo "port: "${args[4]}
-# echo ""${args[5]}
+# params 입력받기
+echo "**********************************************"
+echo "Please Enter The Params"
+read -p "ProjectName : "  ProjectName
+read -p "URL : " URL
+read -p "UserName : " UserName
+read -p "Password : " Password
+read -p "Port : " Port
+read -p "Daemon <Y/N> : " Daemon
+echo "**********************************************"
 
 # 데몬 조건문
-if [ "${daemon}" == "Y" ]
+if [ "${Daemon}" == "Y" ]
 then
         DemonOpt="-d"
-        echo "DemonOpt: ON"
-elif [ "${daemon}" = "N" ]
+        echo "********************"
+        echo "*** DemonOpt: ON ***"
+        echo "********************"
+elif [ "${Daemon}" = "N" ]
 then
         DaemonOpt=""
-        echo "DemonOpt: OFF"
+        echo "*********************"
+        echo "*** DemonOpt: OFF ***"
+        echo "*********************"
 else
         exit 1
         echo "It's the wrong option Try Again"
@@ -68,11 +65,11 @@ docker stop ${ProjectName}
 docker rename ${ProjectName} old${ProjectName}
 
 
-# 프로젝트 폴더 진입 (절대경로)
-echo "**************************************"
-echo "*** Entering The Project Directory ***"
-echo "**************************************"
-cd ~/dev/${ProjectName}
+# # 프로젝트 폴더 진입 (절대경로)
+# echo "**************************************"
+# echo "*** Entering The Project Directory ***"
+# echo "**************************************"
+# cd ~/dev/${ProjectName}
 
 
 # git pull
