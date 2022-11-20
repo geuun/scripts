@@ -2,6 +2,7 @@
 
 # deploy.sh
 # 실행조건
+# deploy.sh 파일이 Project Root Directory에 위치
 # 프로젝트 명 == 이미지 태그 == 컨테이너 이름 
 # url, username, password => 환경변수
 # sudo 권한 or docker 권한
@@ -20,9 +21,9 @@
 echo "**********************************************"
 echo "Please Enter The Params"
 read -p "ProjectName : "  ProjectName
-read -p "URL : " URL
-read -p "UserName : " UserName
-read -p "Password : " Password
+read -p "DB_URL : " DB_URL
+read -p "DB_UserName : " DB_UserName
+read -p "DB_Password : " DB_Password
 read -p "Port : " Port
 read -p "Daemon <Y/N> : " Daemon
 echo "**********************************************"
@@ -34,7 +35,7 @@ then
         echo "********************"
         echo "*** DemonOpt: ON ***"
         echo "********************"
-elif [ "${Daemon}" = "N" ]
+elif [ "${Daemon}" == "N" ]
 then
         DaemonOpt=""
         echo "*********************"
@@ -48,10 +49,10 @@ fi
 
 # 최종 입력 값
 echo "*****************************************************************"
-echo "*** <ProjectName> <url> <username> <password> <port> <Deamon> ***"
+echo "*** <ProjectName> <DB_URL> <DB_UserName> <DB_Password> <Port> <Deamon> ***"
 echo "*****************************************************************"
 echo ""
-echo "Your params >>" ${ProjectName} ${URL} ${UserName} ${Password} ${Port}  ${DemonOpt}
+echo "Your params >>" ${ProjectName} ${DB_URL} ${DB_UserName} ${DB_Password} ${Port}  ${DemonOpt}
 echo ""
 
 # 기존 컨테이너 중지
@@ -80,21 +81,31 @@ git pull
 
 
 # 이미지 빌드
+ImageTag=${ProjectName}
 echo "*******************"
 echo "*** Build image ***"
 echo "*******************"
-docker build -t ${ProjectName} . 
+docker build -t ${ImageTag} . 
 
 
 # 컨테이너 빌드 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 echo "***********************"
 echo "*** Build Container ***"
 echo "***********************"
-docker run ${DemonOpt} --name ${ProjectName} -p ${Port} -e SPRING_DATASOURCE_URL=${URL} -e SPRING_DATASOURCE_USERNAME=${UserName} -e SPRING_DATASOURCE_PASSWORD=${Password} ${DaemonOpt}
+docker run ${DemonOpt} \
+--name ${ProjectName} \
+-p ${Port} \
+-e SPRING_DATASOURCE_URL=${DB_URL} \
+-e SPRING_DATASOURCE_USERNAME=${DB_UserName} \
+-e SPRING_DATASOURCE_PASSWORD=${DB_Password} \
+${ImageTag}
 
 # 완료 문장
 echo "##########################################################################################"
 echo "###################################  Deploy is Done! #####################################"
 echo "##########################################################################################"
+
+
+
 
 
