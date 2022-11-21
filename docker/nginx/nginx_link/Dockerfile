@@ -9,7 +9,9 @@ COPY {appname}.conf /etc/nginx/sites-available/
 # nginx conf files 심볼릭 링크거는 작업
 RUN mkdir -p /etc/nginx/sites-enabled/\
      && ln -s /etc/nginx/sites-available/{appname}.conf /etc/nginx/sites-enabled/
- 
+
+
+VOLUME [ "/data", "/etc/nginx", "/var/log/nginx" ]
  
  
 # 컨테이너 시작시 실행할 커맨드 입력
