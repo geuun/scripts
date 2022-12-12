@@ -6,14 +6,7 @@
 # 프로젝트 명 == 이미지 태그 == 컨테이너 이름 
 # url, username, password => 환경변수
 # sudo 권한 or docker 권한
-# {
-#     <ProjectName> : ${args[0]}
-#     <url> : ${args[1]}
-#     <username> : ${args[2]}
-#     <password> : ${args[3]}
-#     <port> : ${args[4]}
-#     <-d> : ${args[5]}
-# }
+#
 # 입력예시 
 # -> springboot url root 1234 8080:8080 Y
 
