@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+. .env
 
 PULLCONTENTS="docker pull registry.gitlab.com/${GIT_USERNAME}/${PROJECT_NAME}"
 

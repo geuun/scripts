@@ -1,10 +1,9 @@
 #!/bin/bash
 
+. .env
 
 
-
-
-if cat (crontab -l) | grep "nohup */10 * * * * bash ./RUN_CD >> ./deploy.log 2>&1 &" ;
+if crontab -l | grep "nohup */10 * * * * bash ./RUN_CD >> ./deploy.log 2>&1 &" ;
 then
     echo "Crontab already set !"
     echo "So Stop Crontab Setting :)"
