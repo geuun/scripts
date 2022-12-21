@@ -17,7 +17,7 @@ daemon = input("Daemon Option On / Off 을 선택해주세요 (On / Off)")
 # Directory Checking
 # ex) pwd == /home/ubuntu/dev/{project_name}/deploy_scripts
 pwd = "pwd"
-result = subprocess.run(pwd.split(" "), stdout=subprocess.PIPE, text=True)
+result = subprocess.run(pwd.split(" "), stdout=subprocess.DEVNULL, text=True)
 
 
 # class Logger:
