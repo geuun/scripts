@@ -66,8 +66,6 @@ else
 fi
 ###############
 
-touch .env.sh
-
 # Register as an Environment Variable
 echo "export PROJECT_NAME=${PROJECT_NAME}
 export GIT_USERNAME=${GIT_USERNAME}
