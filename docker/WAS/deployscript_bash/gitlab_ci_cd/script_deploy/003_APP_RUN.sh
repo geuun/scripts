@@ -2,7 +2,7 @@
 
 bash ./.env
 
-ENV_CONTENTS=$("${PROJECT_NAME}${GIT_USERNAME}${DB_URL}${DB_USERNAME}${DB_PASSWORD}${HOST_PORT}${CONTAINER_PORT}${DAEMON_OPT}")
+ENV_CONTENTS=$(${PROJECT_NAME}${GIT_USERNAME}${DB_URL}${DB_USERNAME}${DB_PASSWORD}${HOST_PORT}${CONTAINER_PORT}${DAEMON_OPT})
 DOCKER_RUN_COMMEND=$(docker run ${DAEMON_OPT} --name ${PROJECT_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} -e SPRING_DATASOURCE_URL=${DB_URL} -e SPRING_DATASOURCE_USERNAME=${DB_UserName} -e SPRING_DATASOURCE_PASSWORD=${DB_Password} registry.gitlab.com/${GIT_USERNAME}/${PROJECT_NAME}:latest)
 
 echo ""
@@ -26,6 +26,7 @@ then
     echo "Delete the previous docker container"
     docker rm ${PROJECT_NAME}
     echo ""
+fi
 
 
 echo "Deployment Complete !"
