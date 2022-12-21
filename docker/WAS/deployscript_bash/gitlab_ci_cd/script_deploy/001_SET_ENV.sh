@@ -37,9 +37,7 @@ echo "If you answer Y, the variables entered are registered as environment varia
 echo "Are you sure? < Y / N >"
 read -p ">> " CLIENT_RESPONSE
 
-a=0
-LIMIT=1
-while [ $a -le "$LIMIT" ]
+while [ true ]
 do
         if [ "${CLIENT_RESPONSE}" == "Y" ]
         then
