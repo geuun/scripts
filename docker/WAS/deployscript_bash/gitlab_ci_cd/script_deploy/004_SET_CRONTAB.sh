@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bash ./.env
+bash ./script_deploy/.env
 
 
 if crontab -l | grep "nohup */10 * * * * bash ./RUN_CD >> ./deploy.log 2>&1 &" ;

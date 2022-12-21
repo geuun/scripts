@@ -72,7 +72,7 @@ export DB_USERNAME=${DB_USERNAME}
 export DB_PASSWORD=${DB_PASSWORD}
 export HOST_PORT=${HOST_PORT}
 export CONTAINER_PORT=${CONTAINER_PORT}
-export DAEMON_OPT=${DAEMON_OPT}" > .env
+export DAEMON_OPT=${DAEMON_OPT}" > ./script_deploy/.env
 
 # ${PROJECT_NAME}
 # ${GIT_USERNAME}
