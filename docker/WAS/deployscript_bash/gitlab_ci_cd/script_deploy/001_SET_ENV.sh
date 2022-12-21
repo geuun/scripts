@@ -57,38 +57,34 @@ done
 if [ "${DAEMON}" == "Y" ]
 then
         DAEMON_OPT="-d"
-        echo "********************"
-        echo "*** DemonOpt: ON ***"
-        echo "********************"
 elif [ "${DAEMON}" == "N" ]
 then
         DAEMON_OPT=""
-        echo "*********************"
-        echo "*** DemonOpt: OFF ***"
-        echo "*********************"
 else
         echo "It's the wrong option Try Again"
         exit 1
 fi
 ###############
 
-# Register as an Environment Variable
-export PROJECT_NAME
-export GIT_USERNAME
-export DB_URL
-export DB_USERNAME
-export DB_PASSWORD
-export HOST_PORT
-export CONTAINER_PORT
-export DAEMON_OPT
+touch .env.sh
 
-# echo ${PROJECT_NAME}
-# echo ${GIT_USERNAME}
-# echo ${DB_URL}
-# echo ${DB_USERNAME}
-# echo ${DB_PASSWORD}
-# echo ${HOST_PORT}
-# echo ${CONTAINER_PORT}
-# echo ${DAEMON_OPT}
+# Register as an Environment Variable
+echo "export PROJECT_NAME=${PROJECT_NAME}
+export GIT_USERNAME=${GIT_USERNAME}
+export DB_URL=${DB_URL}
+export DB_USERNAME=${DB_USERNAME}
+export DB_PASSWORD=${DB_PASSWORD}
+export HOST_PORT=${HOST_PORT}
+export CONTAINER_PORT=${CONTAINER_PORT}
+export DAEMON_OPT=${DAEMON_OPT}" > .env
+
+# ${PROJECT_NAME}
+# ${GIT_USERNAME}
+# ${DB_URL}
+# ${DB_USERNAME}
+# ${DB_PASSWORD}
+# ${HOST_PORT}
+# ${CONTAINER_PORT}
+# ${DAEMON_OPT}
 
 # ${PROJECT_NAME}${GIT_USERNAME}${DB_URL}${DB_USERNAME}${DB_PASSWORD}${HOST_PORT}${CONTAINER_PORT}${DAEMON_OPT}
