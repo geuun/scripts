@@ -2,7 +2,8 @@ version: '3'
 services:
     jenkins:
         container_name: jenkins
-        image: jenkins
+        build:
+            context: ./dood
         ports:
             - 8080:8080
             - 50000:50000
