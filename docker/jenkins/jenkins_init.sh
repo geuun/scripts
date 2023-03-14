@@ -19,29 +19,37 @@ docker_install() {
     fi
 }
 
-pull_image() {
-    if sh -c "docker pull $1"; then
-        echo "Pulling image $1"
-    else
-        echo "Failed to pull image $1"
-        exit 1
-    fi
-}
+# pull_image() {
+#     if sh -c "docker pull $1"; then
+#         echo "Pulling image $1"
+#     else
+#         echo "Failed to pull image $1"
+#         exit 1
+#     fi
+# }
 
-run_container() {
-    if sh -c "docker run $*"; then
-        echo "# Running container"
-        echo "# Options: $*"
-    else
-        echo "# Failed to run container"
-        exit 1
-    fi
-}
+# run_container() {
+#     if sh -c "docker run $*"; then
+#         echo "# Running container"
+#         echo "# Options: $*"
+#     else
+#         echo "# Failed to run container"
+#         exit 1
+#     fi
+# }
 
 sudo apt update && sudo apt upgrade -y
 
 docker_install
 
-pull_image jenkins/jenkins:lts
+## Docker-compose 방식으로 변경
 
-run_container -d -p 8080:8080 -p 50000:50000 -v /jenkins:/var/jenkins -v /home/ubuntu/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock --name jenkins -u root jenkins/jenkins:lts
+# pull_image jenkins/jenkins:lts
+
+# run_container -d -p 8080:8080 -p 50000:50000 -v /jenkins:/var/jenkins -v /home/ubuntu/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock --name jenkins -u root jenkins/jenkins:lts
+
+mkdir -p ~/jenkins
+
+sudo chmod 777 ~/jenkins
+
+docker compose up -d
