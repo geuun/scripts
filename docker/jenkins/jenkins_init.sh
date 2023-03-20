@@ -48,8 +48,8 @@ docker_install
 
 # run_container -d -p 8080:8080 -p 50000:50000 -v /jenkins:/var/jenkins -v /home/ubuntu/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock --name jenkins -u root jenkins/jenkins:lts
 
-mkdir -p ~/jenkins
+# mkdir -p ~/jenkins
 
-sudo chmod 777 ~/jenkins
+# sudo chmod 777 ~/jenkins
 
 docker compose up -d
