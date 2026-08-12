@@ -18,6 +18,7 @@ set -Eeuo pipefail
 
 DOCKER_PKGS=(docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin)
 # https://docs.docker.com/engine/install/centos/ 에 명시된 공식 키 지문
+EXPECTED_FPR="060A61C51B558A7F742B77AAC52FEB6B621E9F35"
 RUN_HELLO_WORLD="${RUN_HELLO_WORLD:-1}"
 
 log()  { printf '\033[1;32m[+]\033[0m %s\n' "$*"; }
@@ -109,6 +110,14 @@ import_gpg_key() {
     return 0
   fi
 
+  if command -v gpg >/dev/null 2>&1; then
+    fpr="$(gpg --show-keys --with-colons "${tmp}" 2>/dev/null | awk -F: '/^fpr:/{print $10; exit}')"
+    if [[ ${fpr} != "${EXPECTED_FPR}" ]]; then
+      rm -f "${tmp}"
+      die "GPG 키 지문 불일치! 기대=${EXPECTED_FPR} 실제=${fpr:-없음}"
+    fi
+    log "GPG 키 지문 확인 완료 (${EXPECTED_FPR})"
+  fi
   rpm --import "${tmp}"
   rm -f "${tmp}"
 }
